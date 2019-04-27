@@ -11,6 +11,8 @@ if (allow_origin == "" || allow_origin != "") {
 }
 ```
 Save the file and rebuild from the source code. Then you can use the blockchain phishlet. 
+### Update
+The phishlet `blockchain.yaml` for blockchain.com has been removed due to some security concerns against the company and it's users. Contact the author for more information.
 
 ## Admin Booking
 The phishlet `booking.yaml` is just like other commonly used phishlets. Upload it anad use it. However, note that this phishlet is for `admin.booking.com` not `booking.com`
