@@ -16,6 +16,14 @@ These are some precautions you need to take while setting up google phishlet.
 {phish_sub: 'accounts-pk', orig_sub: 'accounts', domain: 'google.pk', session: true, is_landing: false, auto_filter: false}
 ```
 
+### Buggy Phishlets
+The following sites have built-in support and protections against MITM frameworks. Hence, there phishlets will prove to be buggy at some point. 
+<ul>
+    <li>Google</li>
+    <li>ICloud</li>
+</ul>
+If you beleive you have a solution, open a pull request. 
+
 ## Contribution
 <ul>
     <li>Report Bugs.</li>
